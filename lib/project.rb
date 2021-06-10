@@ -9,8 +9,11 @@ class Project
         ProjectBacker.new(self, backer)
     end
 
+    def proj_backers
+        ProjectBacker.all.select {|proj_back| proj_back.project == self}
+    end
+
     def backers
-        associations = ProjectBacker.all.select {|proj_back| proj_back.project == self}
-        associations.map {|proj_back| proj_back.backer}
+        self.proj_backers.map {|proj_back| proj_back.backer}
     end
 end
